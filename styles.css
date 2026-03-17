@@ -1,0 +1,180 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Manrope:wght@400;500;700&display=swap");
+
+:root {
+  --bg-1: #08111a;
+  --bg-2: #15283a;
+  --text: #f5f7ff;
+  --muted: #d7e4ef;
+  --accent: #ffd075;
+  --panel: rgba(8, 17, 26, 0.46);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255, 208, 117, 0.22), transparent 42%),
+    radial-gradient(circle at 82% 84%, rgba(79, 155, 230, 0.2), transparent 44%),
+    linear-gradient(160deg, var(--bg-1), var(--bg-2));
+  overflow-x: hidden;
+}
+
+.scene {
+  position: relative;
+  height: 165vh;
+}
+
+.sticky-frame {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 100vh;
+  overflow: hidden;
+  display: grid;
+  align-items: center;
+}
+
+.hero-image {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+  filter: blur(0px) saturate(1.06) contrast(1.02);
+  transition: filter 0.1s linear, opacity 0.1s linear;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 14px;
+  padding: 30px 22px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.16s linear, transform 0.16s linear;
+  pointer-events: none;
+  background: transparent;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.title {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  font-size: clamp(2.05rem, 6vw, 4.5rem);
+  line-height: 1.08;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-shadow: 0 12px 28px rgba(0, 0, 0, 0.52);
+}
+
+.subtitle {
+  margin: 0;
+  max-width: 780px;
+  font-size: clamp(1rem, 2.1vw, 1.38rem);
+  line-height: 1.65;
+  font-weight: 500;
+  color: var(--muted);
+  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.title::after {
+  content: "";
+  display: block;
+  width: min(44vw, 300px);
+  height: 2px;
+  margin: 14px auto 0;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.8;
+}
+
+@media (max-width: 900px) {
+  .scene {
+    height: 145svh;
+    min-height: 145vh;
+  }
+
+  .overlay {
+    padding: max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
+    gap: 10px;
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+  }
+
+  .title {
+    font-size: clamp(1.6rem, 7.2vw, 3rem);
+    letter-spacing: 0.045em;
+  }
+
+  .subtitle {
+    max-width: 95%;
+    font-size: clamp(0.94rem, 3.9vw, 1.16rem);
+    line-height: 1.52;
+  }
+
+  .title::after {
+    width: min(62vw, 220px);
+  }
+}
+
+@media (max-width: 640px) {
+  .scene {
+    height: 132svh;
+    min-height: 132vh;
+  }
+
+  .overlay {
+    gap: 8px;
+    padding: max(14px, env(safe-area-inset-top)) 14px max(14px, env(safe-area-inset-bottom));
+  }
+
+  .subtitle {
+    line-height: 1.45;
+  }
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .scene {
+    height: 122svh;
+    min-height: 122vh;
+  }
+}
+
+@media (max-aspect-ratio: 1/1) and (max-width: 640px) {
+  .scene {
+    height: 114svh;
+    min-height: 114vh;
+  }
+}
+
+@media (max-height: 500px) and (min-aspect-ratio: 1/1) {
+  .scene {
+    height: 185vh;
+  }
+
+  .title {
+    font-size: clamp(1.4rem, 4.6vw, 2.1rem);
+  }
+
+  .subtitle {
+    font-size: clamp(0.86rem, 2.2vw, 1rem);
+  }
+}
+
