@@ -26,7 +26,7 @@ function startBackgroundAudio() {
 function onScroll() {
   const viewportHeight = window.innerHeight;
 
-  scenes.forEach((scene) => {
+  scenes.forEach((scene, index) => {
     const image = scene.querySelector(".hero-image");
     const overlay = scene.querySelector(".overlay");
     if (!image || !overlay) return;
@@ -43,8 +43,11 @@ function onScroll() {
     image.style.filter = `blur(${blur}px)`;
     image.style.opacity = String(imageOpacity);
 
-    overlay.style.opacity = String(progress);
-    overlay.style.transform = `translateY(${20 - progress * 20}px)`;
+    // Last scene: force full opacity as soon as it starts scrolling
+    const isLast = index === scenes.length - 1;
+    const textProgress = isLast ? Math.min(progress * 6, 1) : Math.min(progress * 2.5, 1);
+    overlay.style.opacity = String(textProgress);
+    overlay.style.transform = `translateY(${20 - textProgress * 20}px)`;
   });
 }
 
